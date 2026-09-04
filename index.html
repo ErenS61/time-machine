@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
+    <title>Calcul de temps d'arrêt</title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="image/favicon.ico" sizes="32x32" type="image/x-icon" />
+    <link rel="icon" type="image/png" sizes="16x16" href="image/favicon-16x16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="image/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="image/apple-touch-icon-180x180.png" />
+  </head>
+  <body>
+    <main class="card">
+      <h1>🛠️ Temps d'arrêt</h1>
+
+      <div class="tabs">
+        <button type="button" class="tab-btn active" data-tab="panne">Panne</button>
+        <button type="button" class="tab-btn" data-tab="nettoyage">Nettoyage</button>
+      </div>
+
+      <!-- Onglet Panne : calcule la durée entre deux heures -->
+      <section id="tab-panne" class="tab-panel active">
+        <p class="subtitle">Entrez l'heure d'arrêt et l'heure de redémarrage</p>
+
+        <form id="downtime-form">
+          <div class="field">
+            <label for="start-time">Heure d'arrêt</label>
+            <input type="time" id="start-time" step="60" required />
+          </div>
+
+          <div class="field">
+            <label for="end-time">Heure de redémarrage</label>
+            <input type="time" id="end-time" step="60" required />
+          </div>
+
+          <button type="submit">Calculer</button>
+        </form>
+
+        <div id="result" class="result hidden">
+          <div class="result-minutes" id="result-minutes"></div>
+          <div class="result-hm" id="result-hm"></div>
+        </div>
+
+        <p id="overnight-note" class="note hidden">↻ Arrêt à cheval sur minuit (24h ajoutées automatiquement)</p>
+      </section>
+
+      <!-- Onglet Nettoyage : calcule l'heure de fin à partir d'une durée -->
+      <section id="tab-nettoyage" class="tab-panel">
+        <p class="subtitle">Entrez l'heure de départ et la durée du nettoyage</p>
+
+        <form id="cleaning-form">
+          <div class="field">
+            <label for="cleaning-start-time">Heure de départ</label>
+            <input type="time" id="cleaning-start-time" step="60" required />
+          </div>
+
+          <div class="field">
+            <label>Durée</label>
+            <div class="preset-group">
+              <button type="button" class="preset-btn active" data-minutes="60">60 min</button>
+              <button type="button" class="preset-btn" data-minutes="90">90 min</button>
+              <button type="button" class="preset-btn" data-minutes="110">110 min</button>
+              <button type="button" class="preset-btn" data-minutes="custom">Personnalisé</button>
+            </div>
+          </div>
+
+          <div class="field hidden" id="custom-minutes-field">
+            <label for="custom-minutes">Durée personnalisée (min)</label>
+            <input type="number" id="custom-minutes" min="1" step="1" placeholder="ex : 45" />
+          </div>
+
+          <button type="submit">Calculer</button>
+        </form>
+
+        <div id="cleaning-result" class="result hidden">
+          <div class="result-minutes" id="cleaning-end-time"></div>
+          <div class="result-hm" id="cleaning-duration-label"></div>
+        </div>
+
+        <p id="cleaning-overnight-note" class="note hidden">↻ Le nettoyage se termine après minuit</p>
+      </section>
+    </main>
+
+    <script>
+      const mainScript = document.createElement("script");
+      mainScript.src = "script.js?v=" + new Date().getTime();
+      mainScript.onload = function () {
+        console.log("Script principal chargé avec succès");
+      };
+      mainScript.onerror = function () {
+        console.error("Erreur de chargement du script principal");
+      };
+      document.body.appendChild(mainScript);
+    </script>
+  </body>
+</html>

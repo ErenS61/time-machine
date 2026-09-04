@@ -1,0 +1,224 @@
+/* ==================== STYLES DE BASE ==================== */
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: "Gotham", sans-serif;
+}
+
+@font-face {
+    font-family: "Gotham";
+    src: url("./fonts/Gotham-Book.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Gotham";
+    src: url("./fonts/Gotham-Bold.woff2") format("woff2");
+    font-weight: bold;
+    font-style: normal;
+}
+
+body {
+    background: #1a1a1a;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* ==================== CARTE PRINCIPALE ==================== */
+.card {
+    width: 100%;
+    max-width: 400px;
+    background: linear-gradient(160deg, #222, #333);
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 0 15px #00ffcc33;
+    box-sizing: border-box;
+}
+
+h1 {
+    color: #00ffcc;
+    margin: 0 0 0.5rem;
+    font-size: 1.6rem;
+    text-shadow: 0 0 10px #00ffcc55;
+}
+
+.subtitle {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin: 0 0 1.5rem;
+}
+
+/* ==================== ONGLETS ==================== */
+.tabs {
+    display: flex;
+    gap: 6px;
+    background: #2a2a2a;
+    border: 1px solid #555;
+    padding: 4px;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 8px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #aaa;
+    background: transparent;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+    color: #fff;
+}
+
+.tab-btn.active {
+    background: #00ffcc;
+    color: #1a1a1a;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+/* ==================== FORMULAIRES ==================== */
+.field {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 0.5rem;
+}
+
+input[type="time"],
+input[type="number"] {
+    width: 100%;
+    padding: 0.8rem;
+    background: #2a2a2a;
+    color: #fff;
+    border: 1px solid #555;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+input[type="time"]:focus,
+input[type="number"]:focus {
+    outline: none;
+    border-color: #00ffcc;
+}
+
+.field.hidden {
+    display: none;
+}
+
+/* ==================== BOUTONS DE PRÉSÉLECTION ==================== */
+.preset-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.preset-btn {
+    padding: 0.7rem;
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #fff;
+    background: #2a2a2a;
+    border: 1px solid #555;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.preset-btn:hover {
+    border-color: #00ffcc;
+}
+
+.preset-btn.active {
+    background: #00ffcc;
+    border-color: #00ffcc;
+    color: #1a1a1a;
+}
+
+/* ==================== BOUTON PRINCIPAL ==================== */
+button[type="submit"] {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #1a1a1a;
+    background: #00ffcc;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background: #00ccaa;
+}
+
+/* ==================== RÉSULTAT ==================== */
+.result {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: #2a2a2a;
+    border: 1px solid #555;
+    border-radius: 10px;
+}
+
+.result.hidden {
+    display: none;
+}
+
+.result-minutes {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #00ffcc;
+    text-shadow: 0 0 10px #00ffcc55;
+    line-height: 1.2;
+}
+
+.result-hm {
+    font-size: 0.95rem;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+.note {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: #aaa;
+}
+
+.note.hidden {
+    display: none;
+}
