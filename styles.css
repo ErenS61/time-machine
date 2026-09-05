@@ -136,20 +136,46 @@ label {
     color: #777;
 }
 
-/* Les input[type="time"] n'ont pas d'attribut placeholder :
-   on grise le champ tant qu'il n'est pas rempli (état "required + vide"),
-   puis on repasse en blanc une fois une heure sélectionnée. */
-input[type="time"].field-input:required:invalid {
-    color: #777;
+/* Champs heure : positionnement propre de l'icône native + alignement du texte */
+input[type="time"].field-input {
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
 }
 
-input[type="time"].field-input:valid {
-    color: #fff;
+input[type="time"].field-input::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.7;
+    cursor: pointer;
 }
 
+input[type="time"].field-input::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+/* Correctifs iOS : empêchent le zoom auto au focus (qui donnait
+   l'impression que le champ se décalait) et alignent le texte à gauche */
+@supports (-webkit-touch-callout: none) {
+    input[type="time"].field-input {
+        min-height: 44px;
+        font-size: 16px;
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    input[type="time"].field-input::-webkit-date-and-time-value {
+        text-align: left;
+        margin-left: 0;
+    }
+}
+
+/* Empêche le zoom automatique sur mobile (nécessite une taille >= 16px) */
 @media (max-width: 480px) {
     .field-input {
-        font-size: 0.95rem;
+        font-size: 16px;
         padding: 0.7rem 0.5rem;
     }
 }
