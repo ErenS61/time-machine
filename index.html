@@ -12,6 +12,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="image/favicon-16x16.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="image/favicon-32x32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="image/apple-touch-icon-180x180.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
   </head>
   <body>
     <main class="card">
@@ -29,12 +32,12 @@
         <form id="downtime-form">
           <div class="field">
             <label for="start-time">Heure d'arrêt</label>
-            <input type="time" id="start-time" step="60" required />
+            <input type="time" id="start-time" step="60" class="field-input" required />
           </div>
 
           <div class="field">
             <label for="end-time">Heure de redémarrage</label>
-            <input type="time" id="end-time" step="60" required />
+            <input type="time" id="end-time" step="60" class="field-input" required />
           </div>
 
           <button type="submit">Calculer</button>
@@ -55,7 +58,7 @@
         <form id="cleaning-form">
           <div class="field">
             <label for="cleaning-start-time">Heure de départ</label>
-            <input type="time" id="cleaning-start-time" step="60" required />
+            <input type="time" id="cleaning-start-time" step="60" class="field-input" required />
           </div>
 
           <div class="field">
@@ -70,7 +73,14 @@
 
           <div class="field hidden" id="custom-minutes-field">
             <label for="custom-minutes">Durée personnalisée (min)</label>
-            <input type="number" id="custom-minutes" min="1" step="1" placeholder="ex : 45" />
+            <input
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]*"
+              id="custom-minutes"
+              class="field-input"
+              placeholder="ex : 45"
+            />
           </div>
 
           <button type="submit">Calculer</button>
@@ -84,6 +94,17 @@
         <p id="cleaning-overnight-note" class="note hidden">↻ Le nettoyage se termine après minuit</p>
       </section>
     </main>
+
+    <!-- Boutons flottants -->
+    <div class="floating-buttons">
+      <button class="main-button" id="mainFloatingButton">
+        <i class="fa-solid fa-plus"></i>
+      </button>
+
+      <button class="refresh-button" onclick="refreshPage()" title="Rafraîchir">
+        <i class="fa-solid fa-rotate-right"></i>
+      </button>
+    </div>
 
     <script>
       const mainScript = document.createElement("script");

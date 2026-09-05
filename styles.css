@@ -112,9 +112,10 @@ label {
     margin-bottom: 0.5rem;
 }
 
-input[type="time"],
-input[type="number"] {
+.field-input {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
     padding: 0.8rem;
     background: #2a2a2a;
     color: #fff;
@@ -126,10 +127,31 @@ input[type="number"] {
     transition: border-color 0.3s;
 }
 
-input[type="time"]:focus,
-input[type="number"]:focus {
+.field-input:focus {
     outline: none;
     border-color: #00ffcc;
+}
+
+.field-input::placeholder {
+    color: #777;
+}
+
+/* Les input[type="time"] n'ont pas d'attribut placeholder :
+   on grise le champ tant qu'il n'est pas rempli (état "required + vide"),
+   puis on repasse en blanc une fois une heure sélectionnée. */
+input[type="time"].field-input:required:invalid {
+    color: #777;
+}
+
+input[type="time"].field-input:valid {
+    color: #fff;
+}
+
+@media (max-width: 480px) {
+    .field-input {
+        font-size: 0.95rem;
+        padding: 0.7rem 0.5rem;
+    }
 }
 
 .field.hidden {
@@ -221,4 +243,92 @@ button[type="submit"]:hover {
 
 .note.hidden {
     display: none;
+}
+/* ==================== BOUTONS FLOTTANTS ==================== */
+.floating-buttons {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 10px;
+    z-index: 9999;
+}
+
+.floating-buttons button:not(.main-button) {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.floating-buttons button {
+    background-color: rgba(128, 128, 128, 0.5);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    padding: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 1px 4px 6px rgba(0, 0, 0, 0.1);
+    height: 54px;
+    width: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.floating-buttons button.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.floating-buttons button:hover {
+    background-color: rgba(128, 128, 128, 0.8);
+    transform: scale(1.1);
+}
+
+.floating-buttons button.main-button {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    background-color: rgba(0, 255, 204, 0.7) !important;
+    z-index: 100;
+}
+
+.floating-buttons button.main-button:hover {
+    background-color: rgba(0, 255, 204, 0.9) !important;
+}
+
+.refresh-button {
+    background-color: rgba(255, 0, 0, 0.5) !important;
+}
+
+.refresh-button:hover {
+    background-color: rgba(255, 0, 0, 0.8) !important;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0, 255, 204, 0.7);
+    }
+    70% {
+        transform: scale(1.05);
+        box-shadow: 0 0 0 10px rgba(0, 255, 204, 0);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(0, 255, 204, 0);
+    }
+}
+
+.floating-buttons button.main-button {
+    animation: pulse 2s infinite;
+}
+
+.floating-buttons button.main-button:hover {
+    animation: none;
 }

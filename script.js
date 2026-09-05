@@ -124,3 +124,45 @@ document.getElementById('cleaning-form').addEventListener('submit', function (e)
   document.getElementById('cleaning-duration-label').textContent = durationText;
   document.getElementById('cleaning-result').classList.remove('hidden');
 });
+// --- Bouton flottant (+/− et refresh) ---
+let buttonsExpanded = false;
+const buttonDelay = 100;
+
+function initFloatingButtons() {
+  const mainButton = document.getElementById('mainFloatingButton');
+  if (!mainButton) return;
+  mainButton.addEventListener('click', toggleButtons);
+}
+
+function toggleButtons() {
+  const mainButton = document.getElementById('mainFloatingButton');
+  const allButtons = document.querySelectorAll('.floating-buttons button:not(.main-button)');
+
+  if (!mainButton) return;
+
+  if (!buttonsExpanded) {
+    mainButton.innerHTML = '<i class="fa-solid fa-minus"></i>';
+    Array.from(allButtons).forEach((button, index) => {
+      setTimeout(() => {
+        button.classList.add('visible');
+      }, index * buttonDelay);
+    });
+  } else {
+    mainButton.innerHTML = '<i class="fa-solid fa-plus"></i>';
+    Array.from(allButtons)
+      .reverse()
+      .forEach((button, index) => {
+        setTimeout(() => {
+          button.classList.remove('visible');
+        }, index * buttonDelay);
+      });
+  }
+
+  buttonsExpanded = !buttonsExpanded;
+}
+
+function refreshPage() {
+  location.reload();
+}
+
+initFloatingButtons();
